@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+
+
+{% block pagestyles %}
+    {{ super() }}
+    <style>
+    .grid-margin {
+        margin-bottom: 2.4rem;
+    }
+    .hide{
+
+        visibility: hidden
+
+    }
+    .table td img {
+        width: 36px;
+        height: 36px;
+        border-radius: 100%;
+    }
+    .img-serv {
+        margin-right: 0.5rem !important;
+    }
+
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tooltip.css')}}"> 
+{% endblock %}
+<!--
+    Conteúdo do aplicativo
+-->
+{% block container %}
+
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Lista de Servidores Cadastrados
+                    <a href="{{ url_for('pages.novo_servidor') }}" class="btn btn-primary">Novo Cadastro</a>
+                </h4>
+                
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>*</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Banco</th>
+                                <th>Agência</th>
+                                <th>Conta</th>
+                                <th>Tipo de Conta</th>
+                                <th colspan="2">Ação</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                {% for servidor in rows %}
+                                <tr>
+                                    <td>
+                                        {% if servidor.photo_url %}
+                                        <!-- <img class="img-serv" src="{{ url_for('static', filename='uploads/'+servidor.photo) }}" alt="image"> -->
+                                        <a href="{{ url_for('pages.update_photo', id=servidor.id)}}">
+                                          <img src="{{ servidor.photo_url }}"  alt="{{ servidor.photo }}">
+                                        </a>
+                                        {% else %}
+                                        <a href="{{ url_for('pages.update_photo', id=servidor.id)}}">                                           
+                                            <img src="https://via.placeholder.com/32" alt="https://via.placeholder.com/32">
+                                        </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ servidor.nome }}</td>
+                                    <td>{{ servidor.cpf }}</td>
+                                    <td>{{ servidor.banco }}</td>
+                                    <td>{{ servidor.agencia }}</td>
+                                    <td>{{ servidor.conta }}</td>
+                                    <td>{{ servidor.tipoconta }}</td>
+                                    <td><a href="{{ url_for('pages.edit', id=servidor.id)}}"><i class="fas fa-user-edit"></i></a></td>
+                                    <td><a href="{{ url_for('pages.delete', id=servidor.id)}}"><i class="fas fa-trash"></i></a></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--
+    Fim conteúdo
+-->
+

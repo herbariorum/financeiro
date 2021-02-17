@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+
+
+<!--
+    Conteúdo do aplicativo
+-->
+{% block container %}
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-4 row">
+                    <div class="col-sm-6">
+                    <h4 class="card-title">Lançamentos Efetuados</h4>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-select" name="mes" id="mes">
+                            <option value="0">Selecione o mês</option>
+                            <option value="1">Janeiro</option>
+                            <option value="2">Fevereiro</option>
+                            <option value="3">Março</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Maio</option>
+                            <option value="6">Junho</option>
+                            <option value="7">Julho</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Setembro</option>
+                            <option value="10">Outubro</option>
+                            <option value="11">Novembro</option>
+                            <option value="12">Dezembro</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-select" name="ano" id="ano">
+                            <option value="0">Selecione o ano</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2025</option>
+                            <option value="2027">2027</option>
+                        </select>
+                    </div>
+                </div>
+               
+                <div class="table-responsive">                    <form action="" name="cart">
+                    <table name="cart" class="table table-bordered table-striped" id="tabEdit">
+                    <thead><tr>
+                        <th></th>
+                        <th>Tipo de Lançamento</th>
+                        <th>Categoria</th>
+                        <th>Descrição</th>
+                        <th>Valor (R$)</th>
+                        <th>Data Pagamento/Recebimento</th>
+                        <th>Acumulado na Data(R$)</th>
+                    </tr>
+                </thead>
+                <tbody id="itemsTable"></tbody>
+                </table>                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}" ></script>
+
+
+<script>
+
+    $(document).ready(function(){
+        $('#ano').change(function(){
+            var mes = $('#mes').val();
+            var ano = $('#ano').val();
+            var data = [mes, ano];
+            $.ajax({
+                url: '/lancamentos/search',
+                data: JSON.stringify(data),
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function(result){
+                    console.log(result);
+                   $("#itemsTable").html('<tr>oi</tr>');
+                }
+            });
+                // form += '<td><button name="remove" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button></td>';
+               
+                // form += '<td colspan="7" style="text-align: right;"><button name="add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></button></td>';
+               
+
+            // operador and
+            // if (mes.length && ano.length && mes != 0 && ano != 0){
+            //     $('#formTable').html(form)
+            // } else {
+            //     $('#formTable').html("")
+            //     alert('Você deve selecionar um mês/ano!');
+            // }
+        });
+        
+    });
+</script>
+
+{% endblock %}

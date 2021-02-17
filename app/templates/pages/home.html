@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+<!--
+    Conteúdo do aplicativo
+-->
+{% block container %}
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="col">        
+                        <div class="card text-white bg-primary mb-3 h-100">
+                            <a href="{{ url_for('pages.servidores')}}">
+                                <i class="far fa-address-card fa-5x text-white" id="icon-card"></i>
+                            </a>
+                            <div class="card-body"  style="text-align: center;">
+                                <h5 class="card-title" >Servidores</h5>
+                                <p class="card-text">Cadastra ou Atualiza os Servidores.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">  
+                        <div class="card text-white bg-success mb-3 h-100">
+                            <a href="{{ url_for('lancamento.index')}}">
+                                <i class="fas fa-clipboard-list fa-5x text-white" id="icon-card"></i>
+                            </a>
+                            <div class="card-body"  style="text-align: center;">
+                                <h5 class="card-title" >Lançamentos</h5>
+                                <p class="card-text">Permite fazer o(s) lançamento(s) de RECEITA(S) e DESPESA(S).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">  
+                        <div class="card text-white bg-warning mb-3 h-100">
+                            <a href="">
+                                <i class="fas fa-print fa-5x text-white" id="icon-card"></i>
+                            </a>
+                            <div class="card-body"  style="text-align: center;">
+                                <h5 class="card-title"  >Relatórios</h5>
+                                <p class="card-text">Permite fazer relatório(s) do(s) LANÇAMENTO(S).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+{% endblock %}
+<!--
+    Fim conteúdo
+-->
+
+{% block script %}
+    
+{% endblock %}

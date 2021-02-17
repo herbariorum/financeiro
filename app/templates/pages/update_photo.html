@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+
+<!--
+    Conteúdo do aplicativo
+-->
+{% block container %}
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                <h4>Atualizar foto de <strong>{{ row.nome}}</strong></h4>
+                {% from '_formhelpers.html' import render_field %}
+                <form method="POST" action="{{ url_for('pages.update_photo', id=row.id)}}" class="col-md-6 offset-md-3" enctype = "multipart/form-data">            
+                   <dl>
+                    {{ form.csrf_token }}
+                    {{ render_field(form.photo)}}
+                    
+                   </dl>
+                   {{ form.submit}}
+                    <a class="btn btn-danger" href="{{ url_for('pages.servidores') }}">Cancela</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+<!--
+    Fim conteúdo
+-->

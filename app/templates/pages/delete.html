@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+
+<!--
+    Conteúdo do aplicativo
+-->
+{% block container %}
+
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+                {% for row in rows %}
+                <p class="alert alert-danger">Tem certeza que deseja deletar o Servidor: <strong>{{ row.nome }}</strong>, CPF: {{ row.cpf}}?</p>
+                <form action="{{ url_for('pages.delete', id=row.id)}}" method="POST">
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                    <a class="btn btn-danger" href="{{ url_for('pages.servidores') }}">Cancela</a>
+                </form>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--
+    Fim conteúdo
+-->

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css')}}">  
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Controle Financeiro</title>
+    {% endif %}
+    {% block pagestyles %}
+    <style>
+        a {
+            text-decoration: none;
+        }
+      .container-scroller {
+          overflow: hidden;
+      }
+      a { text-align: center; }
+      #icon-card {
+          
+          padding: 10px;
+      }
+      .container-scroller .page-body-wrapper {
+          background: #f2edf3;
+          padding-left: 0;
+          padding-right: 0;
+      }
+      .main-panel {
+          width: 100%;
+      }
+      .page-body-wrapper {
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+          flex-direction: column;
+      }
+      .content-wrapper {
+          width: 100%;
+          padding-right: 20px;
+          padding-left: 20px;
+          margin-right: auto;
+          margin-left: auto;
+          margin: auto;
+          padding: 2rem 0.937rem;
+      }
+      @media (min-width: 1200px)
+      .container-scroller .content-wrapper {
+          max-width: 1140px;
+      }
+
+      @media (min-width: 992px)
+      .container-scroller .content-wrapper {
+          max-width: 960px;
+      }
+      @media (min-width: 768px)
+      .container-scroller .content-wrapper {
+          max-width: 720px;
+      }
+      @media (min-width: 576px)
+      .container-scroller .content-wrapper {
+          max-width: 540px;
+      }
+      .container-scroller .content-wrapper {
+          width: 100%;
+          padding-right: 20px;
+          padding-left: 20px;
+          margin-right: auto;
+          margin-left: auto;
+          margin: auto;
+          padding: 2rem 0.937rem;
+      }
+      .page-header {
+          margin: 0 0 1.5rem 0;
+      }
+      .bg-gradient-primary {
+          background: -webkit-gradient(linear, left top, right top, from(#da8cff), to(#9a55ff)) !important;
+          background: linear-gradient(to right, #da8cff, #9a55ff) !important;
+      }
+      .page-title {
+          color: #343a40;
+          font-size: 1.125rem;
+          margin-bottom: 0;
+      }
+      .page-title .page-title-icon {
+          display: inline-block;
+          width: 36px;
+          height: 36px;
+          border-radius: 4px;
+          text-align: center;
+          -webkit-box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35);
+          box-shadow: 0px 3px 8.3px 0.7px rgba(163, 93, 255, 0.35);
+      }
+      .page-title .page-title-icon i {
+          font-size: .9375rem;
+          line-height: 36px;
+      }
+      .footer {
+          background: #f2edf3;
+          border-top: 1px solid #e7dee9;
+          padding: 30px 1rem;
+          transition: all 0.25s ease;
+          -moz-transition: all 0.25s ease;
+          -webkit-transition: all 0.25s ease;
+          -ms-transition: all 0.25s ease;
+          font-size: calc(0.875rem - 0.05rem);
+          font-family: "ubuntu-regular", sans-serif;
+      }   
+        .flashes {
+            text-decoration: none;
+            color: #084298;
+            background-color: #cfe2ff;
+            border-color: #b6d4fe;
+
+            position: relative;
+            padding: 1rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+        }
+        ul.flashes > li {
+            list-style-type: none;
+        }
+  </style>
+    {% endblock %}
+    
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+          <div class="main-panel">
+              <div class="content-wrapper">
+                  <div class="page-header">
+                      <h3 class="page-title">
+                          <a href="{{ url_for('pages.home') }}">
+                          <span class="page-title-icon bg-gradient-primary text-white mr-2">
+                              <i class="fas fa-home"></i>
+                          </span>
+                          </a>
+                          Dashboard
+                        </h3>
+                    </div>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul  class="flashes">
+                        {% for message in messages %}
+                            <li>{{message}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% endwith %}
+                    {% block container %}{% endblock %}
+                  
+              </div> <!--content-wrapper-->
+              <div class="footer">
+                  <div class="container">
+                      <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                              Copyright © 2021 Elias Gomes
+                          </span>
+                      </div>
+                  </div>
+              </div>
+          </div><!--main-panel-->
+      </div><!--container-->
+  
+  </div>
+ 
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" ></script>
+  {% block script %}{% endblock %}
+  </body>
+  
+
+
+</html>

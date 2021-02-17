@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
+
+<!--
+    Conteúdo do aplicativo
+-->
+{% block container %}
+
+<div class="row">
+    <div class="col-12 grid-margin" >
+        <div class="card">
+            <div class="card-body">
+               
+                <h4 class="card-title col-md-6 offset-md-3">Atualiza dados do Servidor</h4>
+                
+                {% from '_formhelpers.html' import render_field %}
+                <form action="{{ url_for('pages.edit', id=id) }}" method="post" class="col-md-6 offset-md-3 " enctype = "multipart/form-data">
+                    <dl>
+                        {{ form.csrf_token }}
+                        {{ render_field(form.nome)}}
+                        {{ render_field(form.cpf)}}
+                        {{ render_field(form.banco)}}
+                        {{ render_field(form.agencia)}}
+                        {{ render_field(form.conta)}}                        
+                        {{ render_field(form.tipoconta)}}  
+                        <input type="hidden" id="photo" class="form-control" name="photo" value="{{ photo }}">                        
+                    </dl>     
+                   
+                    {{ form.submit }}                    
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+<!--
+    Fim conteúdo
+-->
+{% block script %}
+<script src="{{ url_for('static', filename='js/jquery-3.5.1.slim.min.js') }}" ></script>
+<script src="{{ url_for('static', filename='js/jquery.mask.min.js') }}" ></script>
+<script>
+    $(document).ready(function(){
+        $('#cpf').mask('000.000.000-00', {reverse: true})
+        $('#agencia').mask('0000000000-0', {reverse: true})
+        $('#conta').mask('0000000000-0', {reverse: true})
+    });
+
+</script>
+{% endblock %}
